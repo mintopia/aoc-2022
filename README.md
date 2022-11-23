@@ -1,5 +1,7 @@
 # Advent of Code 2021
-An attempt at 2021 Advent of Code in PHP, until I get bored/run out of time around day 8 or 9 and stop.
+An attempt at 2021 Advent of Code in PHP, until I get bored/run out of time around day 8 or 9 and stop. In 2021, I managed to make it to Day 23 before family commitments stopped me continuing!
+
+This AOC application is [shamelessly copied/forked from my 2021 version](https://github.com/mintopia/aoc-2021).
 
 ## Installation
 
@@ -77,7 +79,7 @@ Performance
 
 MIT License
 
-Copyright (c) 2021 Jessica Smith
+Copyright (c) 2022 Jessica Smith
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
