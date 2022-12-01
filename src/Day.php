@@ -16,7 +16,7 @@ abstract class Day extends Command
     protected SymfonyStyle $io;
 
     protected int $dayNumber;
-    protected array $data = [];
+    protected array|string $data = [];
 
     protected bool $isTest = false;
     protected bool $isBenchmark = false;
@@ -161,6 +161,12 @@ abstract class Day extends Command
     {
         $inputFilename = $this->getInputFilename();
         return file($inputFilename, FILE_SKIP_EMPTY_LINES | FILE_IGNORE_NEW_LINES);
+    }
+
+    protected function getInputFile(): string
+    {
+        $inputFilename = $this->getInputFilename();
+        return file_get_contents($inputFilename);
     }
 
     abstract protected function part1(): Result;
