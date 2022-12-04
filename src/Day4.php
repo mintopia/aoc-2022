@@ -41,11 +41,7 @@ class Day4 extends Day
         $sections = explode(',', $input);
         return array_map(function(string $section) {
             [$start, $end] = explode('-', $section);
-            $section = [];
-            for ($i = $start; $i <= $end; $i++) {
-                $section[] = $i;
-            }
-            return $section;
+            return range($start, $end);
         }, $sections);
     }
 }
