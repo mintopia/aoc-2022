@@ -1,5 +1,5 @@
 <?php
-namespace Mintopia\Aoc2022;
+namespace Mintopia\Aoc2022\Meta;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

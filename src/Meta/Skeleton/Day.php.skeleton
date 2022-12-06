@@ -1,0 +1,19 @@
+<?php
+namespace Mintopia\Aoc2022;
+
+use Mintopia\Aoc2022\Helpers\Result;
+
+class Day{:day} extends Day
+{
+    protected function part1(): Result
+    {
+        $answer = 'Foo';
+        return new Result(Result::PART1, $answer);
+    }
+
+    protected function part2(Result $part1): Result
+    {
+        $answer = 'Bar';
+        return new Result(Result::PART2, $answer);
+    }
+}
