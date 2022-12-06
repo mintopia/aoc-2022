@@ -21,7 +21,7 @@ This will install the relevant dependencies.
 
 ## Usage
 
-Once you have installed dependencies, if you're running PHP natively, you can use `run.php` to see the available commands
+Once you have installed dependencies, if you're running PHP natively, you can use `php aoc` or `./aoc`' to see the available commands
 
 ```bash
 php aoc list
@@ -39,6 +39,22 @@ If you are using the docker container approach, you can run these commands in th
 docker-compose run --rm aoc list
 docker-compose run --rm aoc day1
 ```
+
+### Creating a New Day
+
+It's 5AM UK time, it's time for another day of Advent of Code. Before starting to solve the problems of these elves, you can create a skeleton new day with the following command:
+
+```bash
+php aoc make:day <number>
+```
+
+Or
+
+```bash
+docker-compose run --rm aoc make:day <number>
+```
+
+It will copy the Skeleton day class and inputs/outputs to the right places. If the files already exist, it will warn you and ask if you want to overwrite them.
 
 ### Test Data
 
