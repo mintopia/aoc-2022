@@ -2,6 +2,7 @@
 namespace Mintopia\Aoc2022\Meta;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -27,6 +28,10 @@ class MakeDay extends Command
     {
         $this->setDescription("Add a new day");
         $this->addArgument('number', InputArgument::REQUIRED, 'The day number to create');
+        $this->addOption('fetch', 'f', InputOption::VALUE_NONE, 'Fetch the puzzle input for this day');
+        $this->addOption('year', 'y', InputOption::VALUE_OPTIONAL, 'The year to fetch input for', null, [2022, 2021, 2020]);
+        $this->addOption('insecure', 'i', InputOption::VALUE_NONE, "Don't verify TLS certificates");
+        $this->addOption('cookie', 'c', InputOption::VALUE_OPTIONAL, 'Your adventofcode.com session cookie value');
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
@@ -34,6 +39,8 @@ class MakeDay extends Command
         $this->input = $input;
         $this->output = $output;
         $this->io = new SymfonyStyle($this->input, $this->output);
+
+        $this->io->title('Advent of Code Day Skeleton Creator');
 
         if (!$day = $this->getDay()) {
             return self::FAILURE;
@@ -48,7 +55,33 @@ class MakeDay extends Command
             return self::FAILURE;
         }
 
-        return Command::SUCCESS;
+        if ($this->input->getOption('fetch')) {
+            $result = $this->fetchPuzzleInput($day);
+            if ($result !== self::SUCCESS) {
+                return $result;
+            }
+        }
+
+        return self::SUCCESS;
+    }
+
+    protected function fetchPuzzleInput(int $day): int
+    {
+        $command = $this->getApplication()->find('make:input');
+        $args = [
+            'day' => $day,
+        ];
+        if ($this->input->getOption('insecure')) {
+            $args['--insecure'] = true;
+        }
+        if ($year = $this->input->getOption('year')) {
+            $args['--year'] = $year;
+        }
+        if ($cookie = $this->input->getOption('cookie')) {
+            $args['--cookie'] = $cookie;
+        }
+        $input = new ArrayInput($args);
+        return $command->run($input, $this->output);
     }
 
     protected function copyFiles(array $mapping, int $day): bool

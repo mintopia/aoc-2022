@@ -3,14 +3,17 @@
 require_once(dirname(__FILE__) . '/vendor/autoload.php');
 use Symfony\Component\Console\Application;
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 $application = new Application();
 
 $commands = [
     new \Mintopia\Aoc2022\Meta\RunAll(),
     new \Mintopia\Aoc2022\Meta\MakeDay(),
-    new \Mintopia\Aoc2022\Meta\WebInput(),
+    new \Mintopia\Aoc2022\Meta\MakeInput(),
 ];
-for ($i = 1; $i <= 24; $i++) {
+for ($i = 1; $i <= 25; $i++) {
     $className = "\\Mintopia\\Aoc2022\\Day{$i}";
     if (class_exists($className)) {
         $commands[] = new $className;
