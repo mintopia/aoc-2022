@@ -56,6 +56,13 @@ docker-compose run --rm aoc make:day <number>
 
 It will copy the Skeleton day class and inputs/outputs to the right places. If the files already exist, it will warn you and ask if you want to overwrite them.
 
+You can also download the puzzle input by using the `-f` or `--fetch` option. It needs your adventofcode.com session cookie value (get it from your browser). The cookie can be passed in using either the `-c`/`--cookie` argument, the `AOC_SESSION_COOKIE` environment variable (can be specified in a `.env` file) or ultimately, the command will prompt you for it.
+
+```bash
+php aoc make:day 4 --fetch
+```
+
+This command is also available as `make:input` and allows you to specify previous years or even `all` to download all available input.
 ### Test Data
 
 To run the day with testdata, pass `--test` to the command. It will use test fixtures and answers from the `testdata` directory.
