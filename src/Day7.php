@@ -17,7 +17,7 @@ class Day7 extends Day
     {
         parent::loadData();
         $this->parseFilesystem();
-        
+
         // Let's pre-calculate all the sizes for each directory
         $this->root->getSize();
     }
