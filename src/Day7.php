@@ -1,59 +1,35 @@
 <?php
 namespace Mintopia\Aoc2022;
 
-use Mintopia\Aoc2022\Helpers\Day7\Directory;
-use Mintopia\Aoc2022\Helpers\Day7\File;
 use Mintopia\Aoc2022\Helpers\Result;
 
 class Day7 extends Day
 {
-    protected array $directories;
-    protected Directory $root;
+    protected array $sizes = [];
 
     const TOTAL_DISK_SPACE = 70000000;
     const REQUIRED_FREE_SPACE = 30000000;
+    const MAXIMUM_SIZE = 100000;
 
     protected function loadData(): void
     {
         parent::loadData();
-        $this->parseFilesystem();
 
-        // Let's pre-calculate all the sizes for each directory
-        $this->root->getSize();
-    }
-
-    protected function parseFilesystem(): void
-    {
-        $currentDir = null;
+        $currentPath = [];
         foreach ($this->data as $datum) {
-            if ($datum === '$ cd /') {
-                $currentDir = new Directory('', null);
-                $this->root = $currentDir;
-                $this->directories[] = $currentDir;
-
-            } elseif (preg_match('/^(?<size>\d+) (?<name>.*)$/', $datum, $matches)) {
-                $file = new File($matches['name'], $currentDir, $matches['size']);
-                $currentDir->addFile($file);
-
-            } elseif (preg_match('/^dir (?<name>.*)$/', $datum, $matches)) {
-                $dir = new Directory($matches['name'], $currentDir);
-                $currentDir->addDir($dir);
-                $this->directories[] = $dir;
+            if (preg_match('/^(?<size>\d+) (?<name>.*)$/', $datum, $matches)) {
+                foreach ($currentPath as $i => $path) {
+                    $key = implode('/', array_slice($currentPath, 0, $i + 1));
+                    $this->sizes[$key] += $matches['size'];
+                }
 
             } elseif (preg_match('/^\$ cd (?<name>.*)$/', $datum, $matches)) {
-                $name = $matches['name'];
-                if ($name === '..') {
-                    // Up a directory
-                    if (!$currentDir->parent) {
-                        throw new \Exception("At root level, can't go up a directory");
-                    }
-                    $currentDir = $currentDir->parent;
+                if ($matches['name'] === '..') {
+                    array_pop($currentPath);
                 } else {
-                    // Enter a directory
-                    if (!array_key_exists($name, $currentDir->dirs)) {
-                        throw new \Exception("Directory does not exist: {$datum}");
-                    }
-                    $currentDir = $currentDir->dirs[$name];
+                    $currentPath[] = $matches['name'];
+                    $key = implode('/', $currentPath);
+                    $this->sizes[$key] = 0;
                 }
             }
         }
@@ -62,9 +38,8 @@ class Day7 extends Day
     protected function part1(): Result
     {
         $answer = 0;
-        foreach ($this->directories as $dir) {
-            $size = $dir->getSize();
-            if ($size <= 100000) {
+        foreach ($this->sizes as $size) {
+            if ($size <= self::MAXIMUM_SIZE) {
                 $answer += $size;
             }
         }
@@ -73,10 +48,9 @@ class Day7 extends Day
 
     protected function part2(Result $part1): Result
     {
-        $needToDelete = self::REQUIRED_FREE_SPACE - self::TOTAL_DISK_SPACE + $this->root->getSize();
+        $needToDelete = self::REQUIRED_FREE_SPACE - self::TOTAL_DISK_SPACE + current($this->sizes);
         $answer = PHP_INT_MAX;
-        foreach ($this->directories as $dir) {
-            $size = $dir->getSize();
+        foreach ($this->sizes as $size) {
             if ($size >= $needToDelete) {
                 $answer = min($answer, $size);
             }
