@@ -24,8 +24,8 @@ class MakeInput extends Command
 
     protected function configure()
     {
-        $this->addArgument('day', InputArgument::REQUIRED, 'The day to fetch input for. Use all for all input for that year', null, [1, 2, 3]);
-        $this->addOption('year', 'y', InputOption::VALUE_OPTIONAL, 'The year to fetch input for', self::DEFAULT_YEAR, [2022, 2021, 2020, 'all']);
+        $this->addArgument('day', InputArgument::REQUIRED, 'The day to fetch input for. Use all for all input for that year');
+        $this->addOption('year', 'y', InputOption::VALUE_OPTIONAL, 'The year to fetch input for', self::DEFAULT_YEAR);
         $this->addOption('insecure', 'i', InputOption::VALUE_NONE, "Don't verify TLS certificates");
         $this->addOption('cookie', 'c', InputOption::VALUE_OPTIONAL, 'Your adventofcode.com session cookie value');
     }

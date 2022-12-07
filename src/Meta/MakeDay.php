@@ -29,7 +29,7 @@ class MakeDay extends Command
         $this->setDescription("Add a new day");
         $this->addArgument('number', InputArgument::REQUIRED, 'The day number to create');
         $this->addOption('fetch', 'f', InputOption::VALUE_NONE, 'Fetch the puzzle input for this day');
-        $this->addOption('year', 'y', InputOption::VALUE_OPTIONAL, 'The year to fetch input for', null, [2022, 2021, 2020]);
+        $this->addOption('year', 'y', InputOption::VALUE_OPTIONAL, 'The year to fetch input for');
         $this->addOption('insecure', 'i', InputOption::VALUE_NONE, "Don't verify TLS certificates");
         $this->addOption('cookie', 'c', InputOption::VALUE_OPTIONAL, 'Your adventofcode.com session cookie value');
     }
