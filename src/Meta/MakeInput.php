@@ -53,6 +53,7 @@ class MakeInput extends Command
         if ($day === 'all') {
             for ($i = 1; $i <= $this->getMaxDay($year); $i++) {
                 $this->downloadDay($year, $i, $cookie, $verify);
+                sleep(1);
             }
         } else {
             $day = (int)$day;
