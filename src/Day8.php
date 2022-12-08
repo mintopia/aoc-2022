@@ -5,12 +5,10 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day8 extends Day
 {
-    protected array $grid;
-
     protected function loadData(): void
     {
         parent::loadData();
-        $this->grid = array_map(function($line) {
+        $this->data = array_map(function($line) {
             return str_split($line);
         }, $this->data);
     }
@@ -19,7 +17,7 @@ class Day8 extends Day
     {
         $visible = 0;
 
-        foreach ($this->grid as $rowIndex => $row) {
+        foreach ($this->data as $rowIndex => $row) {
             foreach ($row as $colIndex => $tree) {
                 if ($this->isVisible($rowIndex, $colIndex, $tree)) {
                     $visible++;
@@ -33,7 +31,7 @@ class Day8 extends Day
     {
         $score = 0;
 
-        foreach ($this->grid as $rowIndex => $row) {
+        foreach ($this->data as $rowIndex => $row) {
             foreach ($row as $colIndex => $tree) {
                 $ourScore = $this->getScenicScore($rowIndex, $colIndex, $tree);
                 $score = max($score, $ourScore);
@@ -47,7 +45,7 @@ class Day8 extends Day
         if ($rowIndex === 0 || $colIndex === 0) {
             return true;
         }
-        if ($rowIndex === count($this->grid) - 1 || $colIndex === count($this->grid[0]) - 1) {
+        if ($rowIndex === count($this->data) - 1 || $colIndex === count($this->data[0]) - 1) {
             return true;
         }
 
@@ -98,7 +96,7 @@ class Day8 extends Day
     {
         $result = [];
         for($i = 0; $i < $rowIndex; $i++) {
-            $result[] = $this->grid[$i][$colIndex];
+            $result[] = $this->data[$i][$colIndex];
         }
         return $result;
     }
@@ -106,20 +104,20 @@ class Day8 extends Day
     protected function getDown(int $rowIndex, int $colIndex): array
     {
         $result = [];
-        for($i = count($this->grid) - 1; $i > $rowIndex; $i--) {
-            $result[] = $this->grid[$i][$colIndex];
+        for($i = count($this->data) - 1; $i > $rowIndex; $i--) {
+            $result[] = $this->data[$i][$colIndex];
         }
         return $result;
     }
 
     protected function getLeft(int $rowIndex, int $colIndex): array
     {
-        return array_slice($this->grid[$rowIndex], 0, $colIndex);
+        return array_slice($this->data[$rowIndex], 0, $colIndex);
     }
 
     protected function getRight(int $rowIndex, int $colIndex): array
     {
-        $slice = array_slice($this->grid[$rowIndex], $colIndex + 1);
+        $slice = array_slice($this->data[$rowIndex], $colIndex + 1);
         return array_reverse($slice);
     }
 }
