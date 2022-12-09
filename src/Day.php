@@ -38,6 +38,8 @@ abstract class Day extends Command
         $this->addOption('test', 't',  InputOption::VALUE_NONE, 'Use test data');
         $this->addOption('benchmark', 'b',  InputOption::VALUE_NONE, 'Benchmark');
         $this->addOption('iterations', 'i',  InputOption::VALUE_OPTIONAL, 'Iterations for benchmark', 100);
+        $this->addOption('part1', 'p', InputOption::VALUE_NONE, 'Only execute part 1');
+        $this->addOption('noperformance', 'sphp aoc ', InputOption::VALUE_NONE, 'No performance output');
         if ($this->hasVisualisation) {
             $this->addOption('visualise', null, InputOption::VALUE_NONE, 'Enable visualisation');
         }
@@ -73,12 +75,17 @@ abstract class Day extends Command
                 $timings[] = $this->executeDay();
             }
 
-            $timing = new Timing();
-            $timing->getAverages($timings);
-            $timing->render($this->io);
+            if (!$this->input->getOption('noperformance')) {
+                $timing = new Timing();
+                $timing->getAverages($timings);
+                $timing->render($this->io);
+            }
         } else {
             $timing = $this->executeDay();
-            $timing->render($this->io);
+
+            if (!$this->input->getOption('noperformance')) {
+                $timing->render($this->io);
+            }
         }
         return Command::SUCCESS;
     }
@@ -100,6 +107,10 @@ abstract class Day extends Command
         $timing->part1 = hrtime(true) - $start;
 
         $this->processResult($result);
+
+        if ($this->input->getOption('part1')) {
+            return $timing;
+        }
 
         if (!$this->isBenchmark) {
             $this->io->title('Part 2');

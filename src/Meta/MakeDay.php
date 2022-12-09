@@ -15,7 +15,6 @@ class MakeDay extends Command
 
     protected const FILE_MAPPING = [
         'Skeleton/Day.php.skeleton' => 'src/Day{:day}.php',
-        'Skeleton/input.txt' => 'input/day{:day}.txt',
         'Skeleton/test-input.txt' => 'testdata/input/day{:day}.txt',
         'Skeleton/test-output.txt' => 'testdata/output/day{:day}.txt',
     ];
