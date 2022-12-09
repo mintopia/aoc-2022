@@ -28,10 +28,7 @@ class Day9 extends Day
     protected function getVisited(int $ropeLength): int
     {
         $visited = [];
-        $rope = [];
-        for ($i = 0; $i < $ropeLength; $i++) {
-            $rope[] = [0, 0];
-        }
+        $rope = array_fill(0, $ropeLength, [0, 0]);
         foreach ($this->data as [$direction, $distance]) {
             $index = 0;
             $vector = 1;
