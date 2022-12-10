@@ -1,6 +1,7 @@
 <?php
 namespace Mintopia\Aoc2022;
 
+use Mintopia\Aoc2022\Helpers\ASCIIText;
 use Mintopia\Aoc2022\Helpers\Result;
 
 class Day10 extends Day
@@ -8,9 +9,6 @@ class Day10 extends Day
     protected const TARGET_CYCLES = [
         20, 60, 100, 140, 180, 220,
     ];
-
-    protected const ON_PIXEL = '<fg=cyan>█</>';
-    protected const OFF_PIXEL = ' ';
 
     protected function part1(): Result
     {
@@ -42,8 +40,10 @@ class Day10 extends Day
 
     protected function part2(Result $part1): Result
     {
-        $this->output->writeln($part1->carry);
-        return new Result(Result::PART2, '<Not Available>');
+        $ascii = new ASCIIText($part1->carry);
+        $ascii->render($this->io);
+        $answer = $ascii->ocr();
+        return new Result(Result::PART2, $answer);
     }
 
     protected function updateCycle(array $strength, array $image, int $cycle, int $xRegister): array
@@ -63,9 +63,9 @@ class Day10 extends Day
             $image[] = '';
         }
         if (in_array($position, range($xRegister - 1, $xRegister + 1))) {
-            $image[$line] .= self::ON_PIXEL;
+            $image[$line] .= 1;
         } else {
-            $image[$line] .= self::OFF_PIXEL;
+            $image[$line] .= 0;
         }
         return $image;
     }
