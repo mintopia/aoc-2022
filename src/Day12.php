@@ -2,7 +2,6 @@
 namespace Mintopia\Aoc2022;
 
 use Mintopia\Aoc2022\Helpers\Result;
-use Symfony\Component\Console\Output\ConsoleSectionOutput;
 
 class Day12 extends Day
 {
