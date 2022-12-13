@@ -21,7 +21,7 @@ class RunAll extends Command
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        for ($i = 1; $i <= 24; $i++) {
+        for ($i = 1; $i <= 25; $i++) {
             try {
                 $command = $this->getApplication()->find("day{$i}");
                 $command->run($input, $output);

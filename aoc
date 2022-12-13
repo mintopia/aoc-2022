@@ -10,6 +10,7 @@ $application = new Application();
 
 $commands = [
     new \Mintopia\Aoc2022\Meta\RunAll(),
+    new \Mintopia\Aoc2022\Meta\RunLatest(),
     new \Mintopia\Aoc2022\Meta\MakeDay(),
     new \Mintopia\Aoc2022\Meta\MakeInput(),
 ];
