@@ -7,8 +7,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class Timing
 {
     public int $dataLoading;
-    public int $part1;
-    public int $part2;
+    public int $part1 = 0;
+    public int $part2 = 0;
 
     public function getAverages(array $timings): void
     {
