@@ -140,13 +140,13 @@ class Day14 extends Day
             $line = '  ';
             for ($x = $xMin; $x <= $xMax; $x++) {
                 if ([$x, $y] === self::SAND_SOURCE) {
-                    $line .= '<fg=yellow>o</>';
+                    $line .= '<fg=cyan>+</>';
                 } elseif (!isset($cave[$x][$y])) {
                     $line .= ' ';
                 } elseif ($cave[$x][$y] === self::MATERIAL_ROCK) {
                     $line .= '█';
                 } elseif ($cave[$x][$y] === self::MATERIAL_SAND) {
-                    $line .= '<fg=yellow>█</>';
+                    $line .= '<fg=yellow>o</>';
                 }
             }
             $this->output->writeln($line);
