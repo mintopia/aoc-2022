@@ -29,7 +29,9 @@ class Day15 extends Day
                 'distance' => $distance,
             ];
 
-            $this->beacons[] = $beacon;
+            if (!in_array($beacon, $this->beacons)) {
+                $this->beacons[] = $beacon;
+            }
 
             $this->minX = min($this->minX, $beacon[0], $sensor[0] - $distance);
             $this->maxX = max($this->maxX, $beacon[0], $sensor[0] + $distance);
@@ -48,9 +50,6 @@ class Day15 extends Day
 
         $answer = 0;
         for ($x = $this->minX; $x <= $this->maxX; $x++) {
-            if (in_array([$x, $y], $this->beacons)) {
-                $answer--;
-            }
             foreach ($this->sensors as $sensor) {
                 $distance = $this->getManhattanDistance([$sensor->x, $sensor->y], [$x, $y]);
                 // If sensor is out of range, ignore
@@ -70,8 +69,12 @@ class Day15 extends Day
                 break;
             }
         }
-        // How do I have an off-by-one?
-        return new Result(Result::PART1, $answer - 1);
+        foreach ($this->beacons as [$bx, $by]) {
+            if ($by == $y) {
+                $answer--;
+            }
+        }
+        return new Result(Result::PART1, $answer);
     }
 
     protected function part2(Result $part1): Result
@@ -83,6 +86,7 @@ class Day15 extends Day
 
     protected function getBeaconLocation(): array
     {
+        // This is just a brute force of our strategy from part 1, I'm not proud, but it works.
         $max = $this->input->getOption('test') ? 20 : 4000000;
         for ($y = 0; $y <= $max; $y++) {
             for ($x = 0; $x <= $max; $x++) {
