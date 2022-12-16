@@ -3,6 +3,8 @@
 require_once(dirname(__FILE__) . '/vendor/autoload.php');
 use Symfony\Component\Console\Application;
 
+ini_set('memory_limit', '1G');
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
 
