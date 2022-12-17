@@ -9,13 +9,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class MakeInput extends Command
+class FetchInput extends Command
 {
     protected const USER_AGENT = 'github.com/mintopia jess@mintopia.net';
     protected const DEFAULT_YEAR = 2022;
 
 
-    protected static $defaultName = 'make:input';
+    protected static $defaultName = 'fetch:input';
     protected static $defaultDescription = 'Fetch input from the Advent of Code website';
 
     protected InputInterface $input;

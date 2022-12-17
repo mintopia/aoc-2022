@@ -62,7 +62,7 @@ You can also download the puzzle input by using the `-f` or `--fetch` option. It
 php aoc make:day 4 --fetch
 ```
 
-This command is also available as `make:input` and allows you to specify previous years or even `all` to download all available input.
+This command is also available as `fetch:input` and allows you to specify previous years or even `all` to download all available input.
 ### Test Data
 
 To run the day with testdata, pass `--test` to the command. It will use test fixtures and answers from the `testdata` directory.

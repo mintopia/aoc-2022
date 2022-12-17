@@ -85,9 +85,20 @@ abstract class Day extends Command
 
             if (!$this->input->getOption('noperformance')) {
                 $timing->render($this->io);
+                $this->io->writeln("  Peak Memory Usage: <fg=green>{$this->getMemoryUsage()}</>");
+                $this->io->writeln("");
             }
         }
         return Command::SUCCESS;
+    }
+
+    protected function getMemoryUsage(): string
+    {
+        $bytes = memory_get_peak_usage();
+        $size   = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $factor = floor((strlen($bytes) - 1) / 3);
+
+        return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 
     protected function executeDay(): Timing

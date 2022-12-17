@@ -66,7 +66,7 @@ class MakeDay extends Command
 
     protected function fetchPuzzleInput(int $day): int
     {
-        $command = $this->getApplication()->find('make:input');
+        $command = $this->getApplication()->find('fetch:input');
         $args = [
             'day' => $day,
         ];

@@ -14,7 +14,7 @@ $commands = [
     new \Mintopia\Aoc2022\Meta\RunAll(),
     new \Mintopia\Aoc2022\Meta\RunLatest(),
     new \Mintopia\Aoc2022\Meta\MakeDay(),
-    new \Mintopia\Aoc2022\Meta\MakeInput(),
+    new \Mintopia\Aoc2022\Meta\FetchInput(),
 ];
 for ($i = 1; $i <= 25; $i++) {
     $className = "\\Mintopia\\Aoc2022\\Day{$i}";

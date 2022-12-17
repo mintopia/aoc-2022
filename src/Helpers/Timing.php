@@ -42,20 +42,9 @@ class Timing
             ['Part 2', $this->ms($this->part2)],
             new TableSeparator(),
             ['Total', $this->ms($total)],
-            new TableSeparator(),
-            ['Memory', $this->getMemoryUsage()],
         ];
         $io->title('Performance');
         $io->table(['Section', 'Time (ms)'], $table);
-    }
-
-    protected function getMemoryUsage(): string
-    {
-        $bytes = memory_get_peak_usage();
-        $size   = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-        $factor = floor((strlen($bytes) - 1) / 3);
-
-        return sprintf("%.2f", $bytes / pow(1024, $factor)) . @$size[$factor];
     }
 
     protected function ms(int $nanoSeconds): float
