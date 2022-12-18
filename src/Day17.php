@@ -57,11 +57,12 @@ class Day17 extends Day
 
     protected function getHeight(int $desiredIterations): int
     {
-        $loops = 0;
-        $loopHeight = 0;
+        $cycles = 0;
+        $cycleHeight = 0;
         $chamber = [];
         $shapeIndex = 0;
         $moveIndex = 0;
+        $previousStates = [];
         for ($i = 0; $i < $desiredIterations; $i++) {
             $this->applyMovement($shapeIndex, $moveIndex, $chamber);
             $top = array_slice($chamber, 0, 10);
@@ -69,16 +70,16 @@ class Day17 extends Day
             $shapeIndex = ($shapeIndex + 1) % count(self::SHAPES);
 
             // We've seen this state before, we're in a loop!
-            if ($loops === 0) {
+            if ($cycles === 0) {
                 if (isset($previousStates[$key])) {
                     [$previousIteration, $previousHeight] = $previousStates[$key];
-                    $loopLength = $i - $previousIteration;
-                    $loopHeight = count($chamber) - $previousHeight;
+                    $cycleLength = $i - $previousIteration;
+                    $cycleHeight = count($chamber) - $previousHeight;
 
-                    $this->io->writeln("Identified loop at iteration <fg=yellow>{$i}</> with height <fg=yellow>{$loopHeight}</>");
+                    $this->io->writeln("Identified cycle at iteration <fg=yellow>{$i}</> with height <fg=yellow>{$cycleHeight}</>");
 
-                    $loops = floor(($desiredIterations - $i) / $loopLength);
-                    $i += $loops * $loopLength;
+                    $cycles = floor(($desiredIterations - $i) / $cycleLength);
+                    $i += $cycles * $cycleLength;
                 } else {
                     // Store this state to identify if we've looped around
                     $previousStates[$key] = [$i, count($chamber)];
@@ -86,7 +87,9 @@ class Day17 extends Day
                 }
             }
         }
-        return count($chamber) + ($loops * $loopHeight);
+        $iterations = count($chamber);
+        $this->io->writeln("Calculated from <fg=yellow>{$cycles}</> cycles and <fg=yellow>{$iterations}</> iterations");
+        return count($chamber) + ($cycles * $cycleHeight);
     }
 
     protected function applyMovement(int $shapeIndex, int &$moveIndex, array &$chamber): void
