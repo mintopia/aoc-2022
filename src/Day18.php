@@ -85,7 +85,7 @@ class Day18 extends Day
         return new Result(Result::PART2, $exposedFaces);
     }
 
-    protected function addNeighbour(\SplQueue $queue, array &$visited, int $x, int $y, int $z)
+    protected function addNeighbour(\SplQueue $queue, array &$visited, int $x, int $y, int $z): int
     {
         // Have we visited this location?
         if (in_array([$x, $y, $z], $visited)) {
