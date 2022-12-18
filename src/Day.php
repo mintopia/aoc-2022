@@ -85,7 +85,7 @@ abstract class Day extends Command
 
             if (!$this->input->getOption('noperformance')) {
                 $timing->render($this->io);
-                $this->io->writeln("  Peak Memory Usage: <fg=green>{$this->getMemoryUsage()}</>");
+                $this->io->writeln(" Peak Memory Usage: <fg=green>{$this->getMemoryUsage()}</>");
                 $this->io->writeln("");
             }
         }
