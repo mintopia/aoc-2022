@@ -17,6 +17,7 @@ class Day18 extends Day
         {
             [$x, $y, $z] = explode(',', $line);
 
+            // Create a lazy-filled multidimensional array of the cubes indexed by X,Y,Z
             if (!isset($this->cubes[$x])) {
                 $this->cubes[$x] = [];
             }
@@ -25,6 +26,7 @@ class Day18 extends Day
             }
             $this->cubes[$x][$y][$z] = 1;
 
+            // And for easy of use, put them into simple arrays
             $this->x[] = $x;
             $this->y[] = $y;
             $this->z[] = $z;
@@ -35,26 +37,13 @@ class Day18 extends Day
 
     protected function part1(): Result
     {
-        // Naive solution
+        // Iterate each cube and check if its neighbour exists in our cubes array
         $exposedFaces = 0;
         foreach ($this->data as [$x, $y, $z]) {
-            if (!isset($this->cubes[$x][$y][$z - 1])) {
-                $exposedFaces++;
-            }
-            if (!isset($this->cubes[$x][$y][$z + 1])) {
-                $exposedFaces++;
-            }
-            if (!isset($this->cubes[$x][$y - 1][$z])) {
-                $exposedFaces++;
-            }
-            if (!isset($this->cubes[$x][$y - 1][$z])) {
-                $exposedFaces++;
-            }
-            if (!isset($this->cubes[$x - 1][$y][$z])) {
-                $exposedFaces++;
-            }
-            if (!isset($this->cubes[$x + 1][$y][$z])) {
-                $exposedFaces++;
+            foreach ([-1, 1] as $i) {
+                $exposedFaces += (int) !isset($this->cubes[$x + $i][$y][$z]);
+                $exposedFaces += (int) !isset($this->cubes[$x][$y + $i][$z]);
+                $exposedFaces += (int) !isset($this->cubes[$x][$y][$z + $i]);
             }
         }
         return new Result(Result::PART1, $exposedFaces);
@@ -62,8 +51,7 @@ class Day18 extends Day
 
     protected function part2(Result $part1): Result
     {
-        // 3D Flood Fill
-
+        // 3D Flood Fill from a point at the edge of the volume
         $xMax = max(...$this->x) + 1;
         $yMax = max(...$this->y) + 1;
         $zMax = max(...$this->z) + 1;
@@ -87,14 +75,10 @@ class Day18 extends Day
             }
 
             // Expand out in each direction
-            foreach ([$x - 1, $x + 1] as $nX) {
-                $exposedFaces += $this->addNeighbour($queue, $visited, $nX, $y, $z);
-            }
-            foreach ([$y - 1, $y + 1] as $nY) {
-                $exposedFaces += $this->addNeighbour($queue, $visited, $x, $nY, $z);
-            }
-            foreach ([$z - 1, $z + 1] as $nZ) {
-                $exposedFaces += $this->addNeighbour($queue, $visited, $x, $y, $nZ);
+            foreach ([-1, 1] as $i) {
+                $exposedFaces += $this->addNeighbour($queue, $visited, $x + $i, $y, $z);
+                $exposedFaces += $this->addNeighbour($queue, $visited, $x, $y + $i, $z);
+                $exposedFaces += $this->addNeighbour($queue, $visited, $x, $y, $z + $i);
             }
         }
 
@@ -113,6 +97,7 @@ class Day18 extends Day
             return 1;
         }
 
+        // We've visited this location, don't use it again
         $visited[] = [$x, $y, $z];
         $queue->enqueue([$x, $y, $z]);
         return 0;
