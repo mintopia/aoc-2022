@@ -63,7 +63,9 @@ class Day17 extends Day
         $shapeIndex = 0;
         $moveIndex = 0;
         $previousStates = [];
+        $iterations = 0;
         for ($i = 0; $i < $desiredIterations; $i++) {
+            $iterations++;
             $this->applyMovement($shapeIndex, $moveIndex, $chamber);
             $top = array_slice($chamber, 0, 10);
             $key = json_encode([$top, $shapeIndex, $moveIndex]);
@@ -76,7 +78,7 @@ class Day17 extends Day
                     $cycleLength = $i - $previousIteration;
                     $cycleHeight = count($chamber) - $previousHeight;
 
-                    $this->io->writeln("Identified cycle at iteration <fg=yellow>{$i}</> with height <fg=yellow>{$cycleHeight}</>");
+                    $this->io->writeln("Identified cycle iterations <fg=yellow>{$previousIteration}</> to <fg=yellow>{$i}</> with height <fg=yellow>{$cycleHeight}</>");
 
                     $cycles = floor(($desiredIterations - $i) / $cycleLength);
                     $i += $cycles * $cycleLength;
@@ -87,7 +89,6 @@ class Day17 extends Day
                 }
             }
         }
-        $iterations = count($chamber);
         $this->io->writeln("Calculated from <fg=yellow>{$cycles}</> cycles and <fg=yellow>{$iterations}</> iterations");
         return count($chamber) + ($cycles * $cycleHeight);
     }
