@@ -91,7 +91,7 @@ class Day19 extends Day
         // Our options are to build one of 4 robot types
         foreach (self::MATERIALS as $robotType) {
             // We don't want to build more robots than are needed
-            if ($state['materials'][$robotType] >= $blueprint->max[$robotType]) {
+            if ($state['robots'][$robotType] >= $blueprint->max[$robotType]) {
                 // We don't need more of this robot type
                 continue;
             }

@@ -43,7 +43,7 @@ class Blueprint {
         foreach ($this->costs as $cost) {
             foreach ($cost as $mat => $amount) {
                 // I don't know why we need a 3 here. Apparently somehow it needs it
-                $this->max[$mat] = max($this->max[$mat], $amount + 3);
+                $this->max[$mat] = max($this->max[$mat], $amount);
             }
         }
     }
