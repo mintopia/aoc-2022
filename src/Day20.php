@@ -28,8 +28,9 @@ class Day20 extends Day
     protected function part2(Result $part1): Result
     {
         $data = array_map(function(object $data): object {
-            $data->value *= self::DECRYPTION_KEY;
-            return $data;
+            $clone = clone($data);
+            $clone->value *= self::DECRYPTION_KEY;
+            return $clone;
         }, $this->data);
         $answer = $this->getAnswer($data, 10);
         return new Result(Result::PART2, $answer);
@@ -37,8 +38,9 @@ class Day20 extends Day
 
     protected function getAnswer(array $data, int $mix): int
     {
+        $original = $data;
         for ($i = 0; $i < $mix; $i++) {
-            $data = $this->mix($data);
+            $data = $this->mix($original, $data);
         }
         $zeroIndex = null;
         foreach ($data as $zeroIndex => $obj) {
@@ -58,10 +60,10 @@ class Day20 extends Day
         return $answer;
     }
 
-    protected function mix(array $input): array
+    protected function mix(array $originalData, array $input): array
     {
         $count = count($input);
-        foreach ($this->data as $original) {
+        foreach ($originalData as $original) {
             $index = array_search($original, $input);
             $data = $input[$index];
             $newIndex = ($index + $data->value) % ($count - 1);
