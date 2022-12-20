@@ -83,7 +83,7 @@ class Day19 extends Day
 
         // If we couldn't possibly earn more than our best in the remaining time, finish now
         $geodes = $state['materials']['geode'] + ($state['robots']['geode'] * $time);
-        $possible = $geodes + round(($time * ($time + 1)) / 2);
+        $possible = $geodes + round(($time * ($time - 1)) / 2);
         if ($possible < $best) {
             return $geodes;
         }
