@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day15 extends Day
 {
+    protected const TITLE = 'Beacon Exclusion Zone';
     protected array $sensors = [];
     protected array $beacons = [];
 

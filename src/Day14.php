@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day14 extends Day
 {
+    protected const TITLE = 'Regolith Resevoir';
     protected const MATERIAL_SAND = 'sand';
     protected const MATERIAL_ROCK = 'rock';
     protected const SAND_SOURCE = [500, 0];

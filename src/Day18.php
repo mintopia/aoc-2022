@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day18 extends Day
 {
+    protected const TITLE = 'Boiling Boulders';
     protected array $cubes = [];
     protected array $x = [];
     protected array $y = [];

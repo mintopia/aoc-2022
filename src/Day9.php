@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day9 extends Day
 {
+    protected const TITLE = 'Rope Bridge';
     protected function loadData(): void
     {
         parent::loadData();

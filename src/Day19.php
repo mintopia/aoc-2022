@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day19 extends Day
 {
+    protected const TITLE = 'Not Enough Minerals';
     protected array $blueprints = [];
 
     protected const MATERIALS = [

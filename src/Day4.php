@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day4 extends Day
 {
+    protected const TITLE = 'Camp Cleanup';
 
     protected function loadData(): void
     {

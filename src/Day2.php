@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day2 extends Day
 {
+    protected const TITLE = 'Rock Paper Scissors';
     const PART1_LOOKUP = [
         'A X' => 4,
         'A Y' => 8,

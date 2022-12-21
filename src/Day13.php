@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day13 extends Day
 {
+    protected const TITLE = 'Distress Signal';
     protected function loadData(): void
     {
         parent::loadData();

@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 // Heavily influenced by https://github.com/vinnymaker18/adventofcode/blob/main/2022/day16/program.py
 class Day16 extends Day
 {
+    protected const TITLE = 'Proboscidea Volcanium';
     protected array $valves = [];
     protected array $graph = [];
 

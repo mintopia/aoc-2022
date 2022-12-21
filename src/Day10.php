@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day10 extends Day
 {
+    protected const TITLE = 'Cathode-Ray Tube';
     protected const TARGET_CYCLES = [
         20, 60, 100, 140, 180, 220,
     ];

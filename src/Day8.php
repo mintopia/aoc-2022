@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day8 extends Day
 {
+    protected const TITLE = 'Treetop Tree House';
     protected function loadData(): void
     {
         parent::loadData();

@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day17 extends Day
 {
+    protected const TITLE = 'Pyroclastic Flow';
     protected const MOVE_LEFT = '<';
     protected const MOVE_RIGHT = '>';
 

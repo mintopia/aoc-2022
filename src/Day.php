@@ -11,6 +11,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class Day extends Command
 {
+    protected const TITLE = null;
+
     protected InputInterface $input;
     protected OutputInterface $output;
     protected SymfonyStyle $io;
@@ -60,7 +62,11 @@ abstract class Day extends Command
         $this->output = $output;
         $this->io = new SymfonyStyle($this->input, $this->output);
 
-        $this->io->block("Advent of Code: Day {$this->dayNumber}", null, 'fg=black;bg=cyan', ' ', true);
+        $title = '';
+        if (static::TITLE !== null) {
+            $title = ' - ' . static::TITLE;
+        }
+        $this->io->block("Advent of Code: Day {$this->dayNumber}{$title}", null, 'fg=black;bg=cyan', ' ', true);
 
         if ($this->input->getOption('test')) {
             $this->isTest = true;

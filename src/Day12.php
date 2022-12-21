@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day12 extends Day
 {
+    protected const TITLE = 'Hill Climbing Algorithm';
     protected bool $hasVisualisation = true;
     protected function loadData(): void
     {

@@ -3,7 +3,7 @@ namespace Mintopia\Aoc2022;
 
 use Mintopia\Aoc2022\Helpers\Result;
 
-class Day{:day} extends Day
+class Day22 extends Day
 {
     protected const TITLE = 'Title';
 

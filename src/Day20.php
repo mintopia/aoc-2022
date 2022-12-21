@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day20 extends Day
 {
+    protected const TITLE = 'Grove Positioning System';
     protected const DECRYPTION_KEY = 811589153;
 
     protected function loadData(): void

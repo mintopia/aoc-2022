@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day1 extends Day
 {
+    protected const TITLE = 'Calorie Counting';
 
     protected function loadData(): void
     {

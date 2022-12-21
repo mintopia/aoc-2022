@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day7 extends Day
 {
+    protected const TITLE = 'No Space Left On Device';
     protected array $sizes = [];
 
     const TOTAL_DISK_SPACE = 70000000;

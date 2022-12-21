@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day11 extends Day
 {
+    protected const TITLE = 'Monkey in the Middle';
     protected function part1(): Result
     {
         $monkeys = $this->getMonkeys();

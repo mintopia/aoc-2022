@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day3 extends Day
 {
+    protected const TITLE = 'Rucksack Reorganization';
 
     protected function part1(): Result
     {

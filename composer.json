@@ -19,6 +19,5 @@
         "league/html-to-markdown": "^5.1",
         "vlucas/phpdotenv": "^5.5",
         "guzzlehttp/guzzle": "^7.5",
-        "ext-bcmath": "*"
     }
 }

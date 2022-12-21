@@ -6,6 +6,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day5 extends Day
 {
+    protected const TITLE = 'Supply Stacks';
     protected $stacks = [];
     protected $moves = [];
 

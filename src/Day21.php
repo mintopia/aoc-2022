@@ -5,6 +5,7 @@ use Mintopia\Aoc2022\Helpers\Result;
 
 class Day21 extends Day
 {
+    protected const TITLE = 'Monkey Math';
     protected array $unsolved = [];
     protected array $solved = [];
 
